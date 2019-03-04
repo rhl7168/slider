@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="淡入淡出.css">
+</head>
+
+<body>
+    <div class="banner">
+        <div class="lunboimg">
+            <img src="images/banner.jpg" alt="">
+            <img src="images/banner1.jpg" alt="">
+            <img src="images/banner_bg.jpg" alt="">
+            <img src="images/banner-3.jpg" alt="">
+        </div>
+        <div class="leftbtn">
+            <img src="images/arrow-l.png" alt="">
+        </div>
+        <div class="rightbtn">
+            <img src="images/arrow-r.png" alt="">
+        </div>
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+    var index=0;
+    function imgFade(inIndex){
+        let outIndex=index;
+        index=inIndex;
+        if(index>$('.lunboimg img').length-1){
+            index=0;
+        }
+        $('.lunboimg img').eq(outIndex).fadeOut(1000);
+        $('.lunboimg img').eq(index).fadeIn(1000);
+        $('.banner li').eq(index).addClass('active').siblings().removeClass('active');
+    } 
+    $('.rightbtn').click(function(){
+        let inIndex=index+1;
+        if(inIndex>$('.lunboimg img').length-1){
+            inIndex=0;
+        }
+        imgFade(inIndex)
+    })
+    $('.leftbtn').click(function(){
+        let inIndex=index-1;
+        if(inIndex<0){
+            inIndex=$('.lunboimg img').length-1;
+        }
+        imgFade(inIndex)
+    })
+    $('.banner ul li').click(function(){
+        imgFade($('.banner ul li').index(this))
+        $(this).addClass('active').siblings().removeClass('active');
+    })
+    </script>
+</body>
+
+</html>
